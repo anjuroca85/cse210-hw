@@ -5,6 +5,8 @@ public class Fraction
     private int _top;
     private int _bottom;
 
+
+    //From this point I started three types of constructors
     public Fraction()
     {
         _top = 1;
@@ -23,6 +25,7 @@ public class Fraction
         _bottom = bottom;
     }
 
+    //From this point I defined the methods. 
 
     public string GetFractionString()
     {
