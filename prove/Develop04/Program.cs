@@ -1,4 +1,5 @@
 using System;
+using System.Threading; // Importing the System.Threading namespace for Thread.Sleep()
 
 class Program
 {
@@ -20,14 +21,21 @@ class Program
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("Option1");
+                    string message = "This activity will help you relax by walking you through breathing in and out slowly.\nClear your mind and focus on your breathing.";
+                    BreathingActivity breathingActivity = new BreathingActivity("Breathing", message);
+                    breathingActivity.Run();
                     break;
 
                 case 2:
-                    Console.WriteLine("Option2");
+                    string reflectingMessage = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
+                    ReflectingActivity reflectingActivity = new ReflectingActivity("Reflecting", reflectingMessage);
+                    reflectingActivity.Run();
                     break;
+
                 case 3:
-                    Console.WriteLine("Option3");
+                    string listingMessage = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
+                    ListingActivity listingActivity = new ListingActivity("Listing", listingMessage);
+                    listingActivity.Run();
                     break;
 
                 case 4:
