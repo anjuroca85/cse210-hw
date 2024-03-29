@@ -1,15 +1,15 @@
 using System.Drawing;
 
-public class Shape
+public abstract class Shape
 {
-    string _color;
+    string _color; //Setting up a member variable that will be in all classes.
 
-    public string GetColor()
+    public string GetColor() //getter
     {
         return _color;
     }
 
-    public void SetColor(string color)
+    public void SetColor(string color) //setter
     {
         _color = color;
     }
@@ -21,9 +21,11 @@ public class Shape
         _color = color;
     }
 
-    public virtual double GetArea()
-    {
-        return 0;
-    }
+    // public virtual double GetArea()
+    // {
+    //     return 0;
+    // }
+
+    public abstract double GetArea();
 
 }
