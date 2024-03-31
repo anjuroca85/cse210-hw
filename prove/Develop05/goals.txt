@@ -1,0 +1,4 @@
+850
+Give a talk,Speak when required,100,True
+Study the scriptures,For at least 10 minutes a day,50
+Attend the temple,Attend and perform ordinance,50,500,3,3

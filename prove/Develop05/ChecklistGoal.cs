@@ -14,7 +14,19 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
+    //A getter
+    public int GetBonus()
+    {
+        return _bonus;
+    }
+
     //Defining the methods:
+    //Adding the following so that i can modify the status after loading the file after saving it.
+    public void SetAmountCompleted(int amountCompleted)
+    {
+        _amountCompleted = amountCompleted;
+    }
+
     public override void RecordEvent()
     {
         _amountCompleted++;
@@ -27,12 +39,14 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{_shortName},{_description},{_points},{_amountCompleted},{_target},{_bonus}";
+        return $"{_shortName},{_description},{_points},{_bonus},{_target},{_amountCompleted}";
     }
 
     // Override GetDetailsString for ChecklistGoal
     public override string GetDetailsString()
     {
-        return $"[ ] {_shortName}: {_description} Completed {_amountCompleted}/{_target} times";
+        //return $"[ ] {_shortName}: {_description} -- Currently completed: {_amountCompleted}/{_target}";
+        return $"{_description} -- Currently completed: {_amountCompleted}/{_target}";
+
     }
 }

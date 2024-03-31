@@ -18,16 +18,32 @@ public abstract class Goal
         _points = points;
     }
 
+    //We will need to define the getters for the GoalManager class to access member variables.
+
+    public string GetShortName()
+    {
+        return _shortName;
+    }
+
+    public int GetPoints()
+    {
+        return _points;
+    }
+
     //Defining Methods, some abstract, others with a body, therefore is an abstract class and not Interface class.
     //First, let's start with abstract methods to be overridden by derived classes
     public abstract void RecordEvent();
     public abstract bool IsComplete();
-    public abstract string GetStringRepresentation();
 
     // Now, a default implementation of GetDetailsString, but still using virtual keyboard so it can be overridden.
     public virtual string GetDetailsString()
     {
-        return $"[ ] {_shortName}: {_description}";
+        //return $"[ ] {_shortName}: {_description}";
+        return _description;
     }
+
+    //Again another abstract method.
+    public abstract string GetStringRepresentation();
+
 
 }

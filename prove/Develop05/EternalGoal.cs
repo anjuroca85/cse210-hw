@@ -9,7 +9,7 @@ public class EternalGoal : Goal
     //Setting the methods
     public override void RecordEvent()
     {
-        // This goal is always considered accomplished
+        // This goal is always considered accomplished so no needed action here.
     }
 
     public override bool IsComplete()
