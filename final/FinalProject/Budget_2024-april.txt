@@ -1,10 +1,13 @@
 Month: april, Year: 2024
+
 Category: Pleasure
-trip to Norway
-paseo
+Trip to Norway                : $10000
+Buy lastest Gen. Phone        : $1500
+
 Category: Essential
-rent
-food
+Tithing                       : $1000
+Food                          : $950
+
 Category: Investment
-Bitcoin
-stocks
+Stocks                        : $1000
+Certificate of Deposit        : $6000

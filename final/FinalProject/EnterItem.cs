@@ -26,7 +26,11 @@ public class EnterItem : Budget
         {
             enteredItemsByCategory[category] = new List<string>();
         }
-        enteredItemsByCategory[category].Add(item);
+        //enteredItemsByCategory[category].Add(item);
+        if (!enteredItemsByCategory[category].Contains(item))
+        {
+            enteredItemsByCategory[category].Add(item);
+        }
 
     }
 

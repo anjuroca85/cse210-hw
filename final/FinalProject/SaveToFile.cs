@@ -3,28 +3,88 @@ public class SaveToFile
     public void Save(Budget budget, string filename)
     {
         Console.WriteLine("Saving expenses to file...");
-        using (StreamWriter writer = new StreamWriter(filename))
+        using (StreamWriter writer = new StreamWriter(filename, true)) // Append mode
         {
             if (budget is EnterItem enterItem)
             {
+                // Write month and year only once
                 writer.WriteLine($"Month: {enterItem.GetMonth()}, Year: {enterItem.GetYear()}");
 
-                // Iterate through each category and write the items associated with it
+                // Write categories only once
+                HashSet<string> writtenCategories = new HashSet<string>();
                 foreach (var category in enterItem.GetCategories())
                 {
-                    writer.WriteLine($"Category: {category}");
-                    //https://www.geeksforgeeks.org/hashset-in-c-sharp-with-examples/
-                    HashSet<string> writtenItems = new HashSet<string>(); // Track written items for each category
+                    if (!writtenCategories.Contains(category))
+                    {
+                        writer.WriteLine($"\nCategory: {category}");
+                        writtenCategories.Add(category);
+                    }
+
+                    // Iterate through items for the current category and write them to the file
+                    HashSet<string> writtenItems = new HashSet<string>();
                     foreach (var item in enterItem.GetEnteredItemsForCategory(category))
                     {
-                        if (!writtenItems.Contains(item)) // Check if item is already written
+                        if (!writtenItems.Contains(item))
                         {
-                            writer.WriteLine(item);
-                            writtenItems.Add(item); // Add item to writtenItems set
+                            // Prompt the user to enter the value for the item
+                            Console.Write($"Enter value in USD for '{item}': $");
+                            float value = float.Parse(Console.ReadLine());
+
+                            // Write the formatted item with its value to the file
+                            writer.WriteLine($"{item,-30}: ${value}");
+
+                            writtenItems.Add(item);
                         }
+
                     }
                 }
+                Console.WriteLine("\nThe values will be store with the respective item. Thanks!");
             }
         }
     }
 }
+
+
+
+
+// public class SaveToFile
+// {
+//     private HashSet<string> writtenCategories = new HashSet<string>();
+//     private HashSet<string> writtenItems = new HashSet<string>();
+
+//     public void Save(Budget budget, string filename)
+//     {
+//         Console.WriteLine("Saving expenses to file...");
+//         using (StreamWriter writer = new StreamWriter(filename, true)) // Append mode
+//         {
+//             if (budget is EnterItem enterItem)
+//             {
+//                 // Clear sets for new entry
+//                 writtenCategories.Clear();
+//                 writtenItems.Clear();
+
+//                 // Write month and year only once
+//                 writer.WriteLine($"Month: {enterItem.GetMonth()}, Year: {enterItem.GetYear()}");
+
+//                 // Write categories and associated items
+//                 foreach (var category in enterItem.GetCategories())
+//                 {
+//                     if (!writtenCategories.Contains(category))
+//                     {
+//                         writer.WriteLine($"\nCategory: {category}");
+//                         writtenCategories.Add(category);
+//                     }
+
+//                     foreach (var item in enterItem.GetEnteredItemsForCategory(category))
+//                     {
+//                         if (!writtenItems.Contains(item))
+//                         {
+//                             writer.WriteLine(item);
+//                             writtenItems.Add(item);
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
