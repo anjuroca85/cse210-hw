@@ -20,6 +20,7 @@ public class EnterItem : Budget
     }
 
 
+
     public void AddEnteredItem(string item, string category)
     {
         if (!enteredItemsByCategory.ContainsKey(category))
@@ -75,6 +76,7 @@ public class EnterItem : Budget
         AddEnteredItem(item, chosenCategory); // Assign the entered item to its category
         return chosenCategory;
     }
+
 
 
     public override bool IsFinished()

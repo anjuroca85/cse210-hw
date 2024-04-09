@@ -4,6 +4,7 @@ class Program
     static void Main(string[] args)
     {
         List<Budget> budgets = new List<Budget>();
+        LoadFromFile loader = new LoadFromFile();
 
         Console.WriteLine("\nWelcome to the budget tool. Please select an option from the menu:");
 
@@ -32,7 +33,7 @@ class Program
                     SaveToFile(budgets);
                     break;
                 case "6":
-                    // Implement Load from File
+                    LoadFromFile(budgets, loader);
                     break;
                 case "7":
                     Console.WriteLine("Exiting...");
@@ -169,6 +170,14 @@ class Program
                 saver.Save(enterItem, $"Budget_{enterItem.GetYear()}-{enterItem.GetMonth()}.txt");
             }
         }
+    }
+
+    static void LoadFromFile(List<Budget> budgets, LoadFromFile loader)
+    {
+        Console.Write("Enter the file name to load: ");
+        string fileName = Console.ReadLine();
+        List<Budget> loadedBudgets = loader.Load(fileName);
+        budgets.AddRange(loadedBudgets);
     }
 
 }
