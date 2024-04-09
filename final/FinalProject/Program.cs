@@ -21,7 +21,8 @@ class Program
                     EnterExpenses(budgets);
                     break;
                 case "2":
-                    // Implement Delete Expenses
+                    DeleteItem deleter = new DeleteItem();
+                    deleter.Delete(budgets);
                     break;
                 case "3":
                     ViewEnteredItems(budgets);

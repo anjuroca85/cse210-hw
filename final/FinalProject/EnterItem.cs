@@ -77,12 +77,18 @@ public class EnterItem : Budget
         return chosenCategory;
     }
 
-
-
     public override bool IsFinished()
     {
         Console.Write("Do you want to continue entering expenses? (yes/no): ");
         string response = Console.ReadLine().ToLower();
         return response != "yes";
+    }
+
+    public void DeleteEnteredItem(string item, string category)
+    {
+        if (enteredItemsByCategory.ContainsKey(category))
+        {
+            enteredItemsByCategory[category].Remove(item);
+        }
     }
 }

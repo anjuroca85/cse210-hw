@@ -1,52 +1,38 @@
-public class DeleteItem : Budget
+using System;
+using System.Collections.Generic;
+
+public class DeleteItem
 {
-    private List<string> enteredItems;
-
-    public DeleteItem(string month, int year) : base(month, year)
+    public void Delete(List<Budget> budgets)
     {
-        enteredItems = new List<string>();
-    }
+        Console.WriteLine("Delete an item:");
 
-    public void AddItemToDelete(string item)
-    {
-        enteredItems.Add(item);
-    }
+        // Prompt the user for the month, year, category, and item to delete
+        Console.Write("Enter the month: ");
+        string month = Console.ReadLine().Trim().ToLower();
+        Console.Write("Enter the year: ");
+        int year = int.Parse(Console.ReadLine().Trim());
+        // Read the category input from the user
+        Console.Write("Enter the category: ");
+        string categoryInput = Console.ReadLine().Trim().ToLower();
 
-    public void ShowEnteredItems()
-    {
-        Console.WriteLine("Entered Items:");
-        foreach (var item in enteredItems)
+        // Capitalize the first letter of the category
+        string category = char.ToUpper(categoryInput[0]) + categoryInput.Substring(1);
+        Console.Write("Enter the item to delete: ");
+        string item = Console.ReadLine().Trim();
+
+        // Find the budget with the specified month and year
+        EnterItem budget = (EnterItem)budgets.Find(b => b is EnterItem && b.GetMonth().ToLower() == month && b.GetYear() == year);
+
+        if (budget != null)
         {
-            Console.WriteLine(item);
+            // Attempt to delete the entered item from the specified category
+            budget.DeleteEnteredItem(item, category);
+            Console.WriteLine("Item deleted successfully.");
         }
-    }
-
-    public override string CategorizeExpense(string item)
-    {
-        Console.WriteLine("Available categories:");
-        foreach (var cat in GetCategories())
+        else
         {
-            Console.WriteLine(cat);
+            Console.WriteLine("No budget found for the specified month and year.");
         }
-
-        Console.Write($"Enter category for '{item}': ");
-        string chosenCategory = Console.ReadLine();
-        return chosenCategory;
-    }
-
-    public override bool IsFinished()
-    {
-        if (enteredItems.Count == 0)
-        {
-            Console.WriteLine("No items to delete.");
-            return true;
-        }
-
-        Console.WriteLine("Items to delete:");
-        ShowEnteredItems();
-
-        Console.Write("Do you want to continue deleting items? (yes/no): ");
-        string response = Console.ReadLine().ToLower();
-        return response != "yes";
     }
 }
