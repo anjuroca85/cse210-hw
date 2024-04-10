@@ -37,7 +37,7 @@ public class LoadFromFile
                     string[] parts = line.Split(':');
                     string itemName = parts[0].Trim();
                     float value = float.Parse(parts[1].Trim().Replace("$", ""));
-                    enterItem.AddEnteredItem(itemName, ""); 
+                    enterItem.AddEnteredItem(itemName, "");
                 }
             }
         }
