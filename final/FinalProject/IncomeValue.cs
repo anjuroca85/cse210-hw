@@ -1,29 +1,14 @@
-public class IncomeValue : Budget
+public class IncomeValue
 {
-    private double mainIncome;
+    private float _amount; // Private field to keep encapsulation
 
-    public IncomeValue(string month, int year, double mainIncome) : base(month, year)
+    public IncomeValue(float amount) // Constructor 
     {
-        this.mainIncome = mainIncome;
+        _amount = amount;
     }
 
-    public override string CategorizeExpense(string item)
+    public float GetAmount() //Getter
     {
-        return "Income";
-    }
-
-    public override bool IsFinished()
-    {
-        return true;
-    }
-
-    public void UpdateMainIncome(double additionalIncome)
-    {
-        mainIncome += additionalIncome;
-    }
-
-    public double GetMainIncome()
-    {
-        return mainIncome;
+        return _amount;
     }
 }

@@ -91,4 +91,39 @@ public class EnterItem : Budget
             enteredItemsByCategory[category].Remove(item);
         }
     }
+
+
+    public float CalculateTotalSpending()
+    {
+        float totalSpending = 0;
+
+        foreach (var itemList in enteredItemsByCategory.Values)
+        {
+            foreach (var item in itemList)
+            {
+                // Split the item string into its name and value parts
+                string[] parts = item.Split(':');
+                if (parts.Length == 2)
+                {
+                    // Extract the value part and parse it to a float
+                    string valueString = parts[1].Trim().Replace("$", ""); // Remove $ sign and trim any whitespace if present
+                    if (float.TryParse(valueString, out float value))
+                    {
+                        totalSpending += value; // Add the value to the total spending
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: Unable to parse value for item '{parts[0].Trim()}'.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Error: Invalid item format '{item}'.");
+                }
+            }
+        }
+
+        return totalSpending;
+    }
+
 }

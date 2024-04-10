@@ -1,53 +1,14 @@
-public class SpendingValue : Budget
+public class SpendingValue
 {
-    private Dictionary<string, double> expenses;
+    private float _amount; // Private field to keep encapsulation
 
-    public SpendingValue(string month, int year) : base(month, year)
+    public SpendingValue(float amount) // Constructor 
     {
-        expenses = new Dictionary<string, double>();
+        _amount = amount;
     }
 
-    public override string CategorizeExpense(string item)
+    public float GetAmount() //Getter
     {
-        Console.WriteLine("Available categories:");
-        foreach (var cat in GetCategories())
-        {
-            Console.WriteLine(cat);
-        }
-
-        Console.Write($"Enter category for '{item}': ");
-        string chosenCategory = Console.ReadLine();
-
-        Console.Write($"Enter amount for '{item}': ");
-        double amount = Convert.ToDouble(Console.ReadLine());
-
-        expenses[item] = amount;
-        return chosenCategory;
-    }
-
-    public override bool IsFinished()
-    {
-        Console.Write("Do you want to continue entering expenses? (yes/no): ");
-        string response = Console.ReadLine().ToLower();
-        return response != "yes";
-    }
-
-    public void ShowExpenses()
-    {
-        Console.WriteLine("Spending Items:");
-        foreach (var expense in expenses)
-        {
-            Console.WriteLine($"Item: {expense.Key}, Amount: {expense.Value}");
-        }
-    }
-
-    public double GetTotalSpent()
-    {
-        double total = 0;
-        foreach (var expense in expenses)
-        {
-            total += expense.Value;
-        }
-        return total;
+        return _amount;
     }
 }

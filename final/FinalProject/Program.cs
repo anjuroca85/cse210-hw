@@ -28,7 +28,7 @@ class Program
                     ViewEnteredItems(budgets);
                     break;
                 case "4":
-                    // Implement Analyze Expenses
+                    AnalyzeIncomeAndSpending(budgets);
                     break;
                 case "5":
                     SaveToFile(budgets);
@@ -180,5 +180,31 @@ class Program
         List<Budget> loadedBudgets = loader.Load(fileName);
         budgets.AddRange(loadedBudgets);
     }
+
+    static void AnalyzeIncomeAndSpending(List<Budget> budgets)
+    {
+        // Prompt the user for their income
+        Console.Write("Enter your income: $");
+        float incomeAmount = float.Parse(Console.ReadLine());
+
+        float spendingAmount = 0;
+
+        foreach (var budget in budgets)
+        {
+            if (budget is EnterItem enterItem)
+            {
+                spendingAmount += enterItem.CalculateTotalSpending();
+            }
+        }
+
+        // Create instances of IncomeValue and SpendingValue
+        IncomeValue income = new IncomeValue(incomeAmount);
+        SpendingValue spending = new SpendingValue(spendingAmount);
+
+        // Analyze the spending
+        Analyzer.Analyze(income, spending);
+    }
+
+
 
 }
