@@ -1,12 +1,33 @@
 public class EnterItem : Budget
 {
     private Dictionary<string, List<string>> enteredItemsByCategory; // Map category to its associated items
+    private Dictionary<string, float> itemValues; // New: Map item names to their values
 
     public EnterItem(string month, int year) : base(month, year)
     {
         enteredItemsByCategory = new Dictionary<string, List<string>>();
+        itemValues = new Dictionary<string, float>();//New
         SetMonth(month);
         SetYear(year);
+    }
+
+    public void AddItemValue(string item, float value) //new
+    {
+        itemValues[item] = value;
+    }
+
+    public float GetItemValue(string item) //new
+    {
+        if (itemValues.ContainsKey(item))
+        {
+            return itemValues[item];
+        }
+        else
+        {
+            // Handle case where item value is not found
+            Console.WriteLine($"Error: Value not found for item '{item}'.");
+            return 0; // or any default value
+        }
     }
 
     public List<string> GetEnteredItems()
